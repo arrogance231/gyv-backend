@@ -797,7 +797,117 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        // Resources — Knowledge & Publications sub-page items
+        PageSection::updateOrCreate(
+            ['page_id' => $resourcesPage->id, 'section_key' => 'knowledge_publications_items'],
+            [
+                'title' => 'Knowledge & Publications Items',
+                'content' => [
+                    'heading' => 'Briefs and Factsheets',
+                    'description' => 'Briefs and factsheets to help advocates and partners.',
+                    'items' => [
+                        [
+                            'title' => 'Youth Advocacy Toolkit',
+                            'category' => 'Brief',
+                            'description' => 'A practical guide for youth organizations to translate evidence into policy action.',
+                            'image' => '',
+                            'link' => '/resources/knowledge-publications/youth-advocacy-toolkit',
+                        ],
+                        [
+                            'title' => 'Policy Brief: School Protections',
+                            'category' => 'Brief',
+                            'description' => 'A concise policy brief designed for decision-makers on campus tobacco controls.',
+                            'image' => '',
+                            'link' => '/resources/knowledge-publications/policy-brief-school-protections',
+                        ],
+                        [
+                            'title' => 'Factsheet: Youth Vaping Trends',
+                            'category' => 'Factsheet',
+                            'description' => 'A clear data summary of youth vaping prevalence, risk factors, and policy implications.',
+                            'image' => '',
+                            'link' => '/resources/knowledge-publications/factsheet-youth-vaping-trends',
+                        ],
+                    ],
+                ]
+            ]
+        );
 
+        // Resources — Media sub-page items
+        PageSection::updateOrCreate(
+            ['page_id' => $resourcesPage->id, 'section_key' => 'media_items'],
+            [
+                'title' => 'Media Items',
+                'content' => [
+                    'heading' => 'Media',
+                    'description' => 'Press articles, photo libraries, and short videos for media outreach and storytelling.',
+                    'items' => [
+                        [
+                            'title' => 'Press: Youth Stories',
+                            'category' => 'Article',
+                            'description' => 'A feature article highlighting young advocates, data, and policy progress.',
+                            'image' => '',
+                            'link' => '/resources/media/press-youth-stories',
+                        ],
+                        [
+                            'title' => 'Short Film: Voices for Health',
+                            'category' => 'Video',
+                            'description' => 'A short advocacy film with testimony, context, and calls to action.',
+                            'image' => '',
+                            'link' => '/resources/media/short-film-voices-for-health',
+                        ],
+                    ],
+                ]
+            ]
+        );
+
+        // Resources — Official Communications sub-page items
+        PageSection::updateOrCreate(
+            ['page_id' => $resourcesPage->id, 'section_key' => 'official_communications_items'],
+            [
+                'title' => 'Official Communications Items',
+                'content' => [
+                    'heading' => 'Letters and Statements',
+                    'description' => 'Letters, statements, and formal communications addressed to governments and institutions.',
+                    'items' => [
+                        [
+                            'title' => 'Open Letter to Ministers',
+                            'category' => '2025-11-12',
+                            'description' => 'A formal government letter requesting urgent policy action on youth tobacco use.',
+                            'image' => '',
+                            'link' => '/resources/official-communications/open-letter-to-ministers',
+                        ],
+                        [
+                            'title' => 'Statement on Flavored Products',
+                            'category' => '2026-02-03',
+                            'description' => 'An official communication calling for prohibition of youth-targeted flavored tobacco products.',
+                            'image' => '',
+                            'link' => '/resources/official-communications/statement-on-flavored-products',
+                        ],
+                    ],
+                ]
+            ]
+        );
+
+        // Resources — Toolkits sub-page items
+        PageSection::updateOrCreate(
+            ['page_id' => $resourcesPage->id, 'section_key' => 'toolkits_items'],
+            [
+                'title' => 'Toolkits Items',
+                'content' => [
+                    'heading' => 'Toolkits & Campaign Info',
+                    'description' => 'Practical toolkits, campaign packs, and how-to guides for organizers.',
+                    'items' => [
+                        [
+                            'title' => 'Youth Organizer Starter Kit',
+                            'category' => '',
+                            'description' => 'A step-by-step pack to start a campus campaign, with templates and outreach guidance.',
+                            'image' => '',
+                            'link' => '/campaigns',
+                        ],
+                    ],
+                ]
+            ]
+        );
 
 
 
@@ -882,8 +992,8 @@ class DatabaseSeeder extends Seeder
             'youtube' => 'https://youtube.com/globalyouthvoices'
         ]);
         Setting::set('branding', [
-            'logo' => '/logo.png',
-            'logo_dark' => '/logo-dark.png',
+            'logo' => '/homepage/hero/gyv-logo.svg',
+            'logo_dark' => '/homepage/hero/gyv-logo.svg',
             'favicon' => '/favicon.ico'
         ]);
     }
