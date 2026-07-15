@@ -29,6 +29,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/pages', [PageController::class, 'index']);
     Route::put('/pages/{id}', [PageController::class, 'update']);
     Route::put('/sections/{id}', [PageController::class, 'updateSection']);
+    Route::post('/sections', [PageController::class, 'storeSection']);
+    Route::delete('/sections/{id}', [PageController::class, 'destroySection']);
 
     // Articles CRUD
     Route::post('/articles', [ArticleController::class, 'store']);

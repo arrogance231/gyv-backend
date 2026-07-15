@@ -6,6 +6,7 @@ use App\Models\Page;
 use App\Models\PageSection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
 class PageController extends Controller
 {
@@ -85,6 +86,52 @@ class PageController extends Controller
         return response()->json([
             'message' => 'Section content updated successfully',
             'section' => $section,
+        ]);
+    }
+
+    /**
+     * Create a new repeatable page section (e.g. an additional declaration block).
+     */
+    public function storeSection(Request $request)
+    {
+        if (Gate::denies('edit-site-sections')) {
+            return response()->json(['message' => 'Unauthorized action.'], 403);
+        }
+
+        $validated = $request->validate([
+            'page_id' => 'required|exists:pages,id',
+            'section_key' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('page_sections')->where('page_id', $request->page_id),
+            ],
+            'title' => 'required|string|max:255',
+            'content' => 'required|array',
+        ]);
+
+        $section = PageSection::create($validated);
+
+        return response()->json([
+            'message' => 'Section created successfully',
+            'section' => $section,
+        ], 201);
+    }
+
+    /**
+     * Remove a repeatable page section.
+     */
+    public function destroySection($id)
+    {
+        if (Gate::denies('edit-site-sections')) {
+            return response()->json(['message' => 'Unauthorized action.'], 403);
+        }
+
+        $section = PageSection::findOrFail($id);
+        $section->delete();
+
+        return response()->json([
+            'message' => 'Section deleted successfully',
         ]);
     }
 }
