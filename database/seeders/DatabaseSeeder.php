@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             'manage-events' => 'Create, edit, and manage events',
             'manage-media' => 'Upload, view, and delete media files',
             'edit-settings' => 'Edit general organization website settings',
+            'publish-content' => 'Publish page changes and drafts',
         ];
 
         $permissionModels = [];
@@ -100,43 +101,99 @@ class DatabaseSeeder extends Seeder
             [
                 'title' => 'Hero Section',
                 'content' => [
-                    'title' => 'Uniting',
-                    'highlight' => 'Youth',
-                    'title_suffix' => 'Voices.',
-                    'subtitle' => 'Making Big Tobaccos Pay.',
-                    'primary_cta_text' => 'Join the Movement',
-                    'primary_cta_link' => '/campaigns',
-                    'secondary_cta_text' => 'Read the Declaration',
-                    'secondary_cta_link' => '/declarations',
+                    'title' => 'Young voices.',
+                    'subtitle' => 'Shared demands.',
+                    'highlight' => 'A tobacco-free future.',
+                    'description' => 'Global Youth Voices is a global movement of youth organizations, coalitions, and advocates working together to protect young people from tobacco and nicotine industry harm and demand accountability from the companies responsible.',
+                    'primary_cta_text' => 'Read the Declaration',
+                    'primary_cta_link' => '/declarations',
+                    'secondary_cta_text' => 'About GYV',
+                    'secondary_cta_link' => '/about-us',
                     'bg_image' => '/homepage/hero/bg.jpg',
-                    'bubbles' => [
-                        ['text' => 'Lorem ipsum dolor sit amet consectetur.', 'author' => 'Random Name'],
-                        ['text' => 'Lorem ipsum dolor sit amet consectetur.', 'author' => 'Random Name'],
-                        ['text' => 'Lorem ipsum dolor sit amet consectetur.', 'author' => 'Random Name'],
-                        ['text' => 'Lorem ipsum dolor sit amet consectetur.', 'author' => 'Random Name'],
-                    ]
                 ]
             ]
         );
 
-        // Home Youth Statement
+        // Home Youth Movement Info Section
         PageSection::updateOrCreate(
-            ['page_id' => $homePage->id, 'section_key' => 'youth'],
+            ['page_id' => $homePage->id, 'section_key' => 'movement'],
             [
-                'title' => 'Global Youth Statement Section',
+                'title' => 'Youth Movement Info Section',
                 'content' => [
-                    'heading' => 'Global Youth',
-                    'highlight' => 'Statement',
-                    'subtitle' => 'Global Youth Voices Call on COP10: Ban Harmful Products, Demand Accountability',
-                    'description' => 'Over 30 youth organizations worldwide call on COP10 to take decisive action against tobacco industry tactics and hold the industry financially accountable for the harms it inflicts.',
-                    'cta_text' => 'View the full Statement',
+                    'card1_title' => 'What is Global Youth Voices?',
+                    'card1_p1' => 'Global Youth Voices, or GYV, brings together youth organizations, coalitions, and advocates from different regions around a shared call for stronger tobacco control and tobacco industry accountability.',
+                    'card1_p2' => 'GYV connects young people across countries so that their experiences, evidence, and demands can be heard in the global policy spaces where decisions affecting their health and future are made.',
+                    'card1_link_text' => 'Learn more about GYV',
+                    'card1_link_url' => '/about-us',
+                    'card2_title' => 'Why does GYV matter?',
+                    'card2_p1' => 'Young people remain a central target of the tobacco and nicotine industry. Flavors, attractive product designs, influencer promotion, digital marketing, and misleading claims about innovation and harm reduction are used to make addiction appear normal, modern, and harmless.',
+                    'card2_p2' => 'GYV helps young people respond collectively—not only by raising awareness, but by calling for laws, policies, and accountability measures that protect present and future generations.',
+                    'card2_link_text' => 'Learn why we exist',
+                    'card2_link_url' => '/about-us#why-we-exist',
+                ]
+            ]
+        );
+
+        // Home Youth Declaration Section
+        PageSection::updateOrCreate(
+            ['page_id' => $homePage->id, 'section_key' => 'declaration'],
+            [
+                'title' => 'Our Declaration Section',
+                'content' => [
+                    'title_prefix' => 'Our',
+                    'highlight' => 'Declaration',
+                    'description' => 'The Global Youth Voices Declaration is the foundation of our movement. It expresses the shared demands of young people for a healthier, fairer, and more accountable future.',
+                    'cta_text' => 'Read the full Declaration',
                     'cta_link' => '/declarations',
-                    'statements' => [
-                        'A ban on novel recreational addictive products',
-                        'Stronger measures on liability and financial accountability',
-                        'Stricter regulation of tobacco depiction in entertainment and digital media',
-                        'Robust advancement of global tobacco control policies'
-                    ]
+                    'card1_title' => 'Protect young people',
+                    'card1_body' => 'End industry practices, products, and promotions that create addiction and cause harm to young people.',
+                    'card2_title' => 'Protect public policy',
+                    'card2_body' => 'Keep tobacco control decisions free from tobacco industry interference and conflicts of interest.',
+                    'card3_title' => 'Demand accountability',
+                    'card3_body' => 'Hold tobacco companies financially and legally responsible for the health, social, environmental, and intergenerational harms they cause.',
+                    'card4_title' => 'Include young people',
+                    'card4_body' => 'Ensure that young people participate meaningfully and independently in decisions affecting their health and future.',
+                ]
+            ]
+        );
+
+        // Home Global Reach Section
+        PageSection::updateOrCreate(
+            ['page_id' => $homePage->id, 'section_key' => 'reach'],
+            [
+                'title' => 'Global Reach Section',
+                'content' => [
+                    'title_prefix' => 'One movement.',
+                    'highlight' => 'Global',
+                    'title_suffix' => 'reach.',
+                    'description_line1' => 'GYV brings together diverse youth organizations, coalitions, and advocates while allowing each participating group to retain its own identity, experience, and area of expertise.',
+                    'description_line2' => 'Together, we connect country and regional realities with a shared global call for bold action.',
+                    'cta_text' => 'Explore Our Global Network',
+                    'cta_link' => '/about-us',
+                    'stat1_value' => '77',
+                    'stat1_label' => 'Participating youth organizations and coalitions',
+                    'stat2_value' => '10',
+                    'stat2_label' => 'Regional youth spokespersons',
+                    'stat3_value' => '6',
+                    'stat3_label' => 'WHO regions represented',
+                    'stat4_value' => '135+',
+                    'stat4_label' => 'Countries reached through participating organizations and networks',
+                ]
+            ]
+        );
+
+        // Home Latest Stories & Resources Section
+        PageSection::updateOrCreate(
+            ['page_id' => $homePage->id, 'section_key' => 'stories'],
+            [
+                'title' => 'Latest Stories & Resources Section',
+                'content' => [
+                    'highlight' => 'Latest',
+                    'title_part1' => 'Stories &',
+                    'title_part2' => 'Resources',
+                    'description' => 'Explore recent youth statements, campaign updates, advocacy stories, videos, and practical materials from across the GYV movement.',
+                    'cta_text' => 'View all Stories & Resources',
+                    'cta_link' => '/resources',
                 ]
             ]
         );
@@ -205,6 +262,81 @@ class DatabaseSeeder extends Seeder
                     'eyebrow' => 'Campaigns',
                     'heading' => 'Campaigns Advocated by Youth Organizations and Partners',
                     'description' => 'Explore live tobacco control campaigns where youth are demanding smoke-free campuses, stronger flavor bans, and better protections from industry marketing.',
+                ]
+            ]
+        );
+
+        // Campaigns — Explore Section
+        PageSection::updateOrCreate(
+            ['page_id' => $campaignsPage->id, 'section_key' => 'explore'],
+            [
+                'title' => 'Explore Our Campaigns',
+                'content' => [
+                    'heading_prefix' => 'Explore Our',
+                    'highlight' => 'Campaigns',
+                    'subtitle' => 'Browse current and previous GYV campaigns. Each campaign page brings together its objectives, messages, statements, youth contributions, advocacy materials, and results.',
+                    'campaigns' => [
+                        [
+                            'tagline' => 'INTERNATIONAL YOUTH DAY 2026',
+                            'title' => 'Our Future Is Not Their Market',
+                            'description' => 'Young people from different contexts unite around shared demands to prepare for COP11, protect policymaking from tobacco industry interference, prevent nicotine addiction, and make the tobacco industry pay.',
+                            'image' => 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80',
+                            'slug' => 'our-future-is-not-their-market',
+                            'year' => '2026',
+                            'category' => 'International Youth Day',
+                            'policy_issue' => 'Industry Interference',
+                        ],
+                        [
+                            'tagline' => 'WORLD NO TOBACCO DAY 2026',
+                            'title' => 'Unmasking the Appeal: Youth Counter Addiction and Demand Accountability',
+                            'description' => 'A global youth campaign exposing how tobacco and nicotine products are designed, marketed, and positioned to create addiction among young people.',
+                            'image' => '/no-tobacco.jpg',
+                            'slug' => 'unmasking-the-appeal',
+                            'year' => '2026',
+                            'category' => 'World No Tobacco Day',
+                            'policy_issue' => 'Flavors & Addiction',
+                        ],
+                        [
+                            'tagline' => 'COP11 2025',
+                            'title' => 'Youth Demands at COP11',
+                            'description' => 'GYV brought youth calls for stronger implementation of WHO FCTC Article 5.3, tobacco industry liability, action on environmental harm, and ambitious tobacco-control measures to Geneva.',
+                            'image' => 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80',
+                            'slug' => 'youth-demands-at-cop11',
+                            'year' => '2025',
+                            'category' => 'COP Policy',
+                            'policy_issue' => 'FCTC Article 5.3',
+                        ],
+                        [
+                            'tagline' => 'INTERNATIONAL YOUTH DAY 2025',
+                            'title' => 'Youth Voices for a Tobacco-Free and Plastic-Free Future',
+                            'description' => 'GYV connected International Youth Day with global plastics negotiations and called for cigarette filters to be addressed, the tobacco industry to be excluded, and polluters to be held accountable.',
+                            'image' => 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80',
+                            'slug' => 'youth-voices-tobacco-free-plastic-free',
+                            'year' => '2025',
+                            'category' => 'International Youth Day',
+                            'policy_issue' => 'Environmental Impact',
+                        ],
+                        [
+                            'tagline' => 'WORLD CONFERENCE ON TOBACCO CONTROL 2025',
+                            'title' => 'Transforming the Future',
+                            'description' => 'Young advocates called on the global tobacco-control community to move from promises to action and place youth participation and accountability at the centre of tobacco control.',
+                            'image' => '/homepage/hero/bg.jpg',
+                            'slug' => 'transforming-the-future',
+                            'year' => '2025',
+                            'category' => 'Global Conference',
+                            'policy_issue' => 'Youth Participation',
+                        ],
+                        [
+                            'tagline' => 'WORLD NO TOBACCO DAY 2025',
+                            'title' => 'Unmasking the Tobacco Industry\'s Appeal',
+                            'description' => 'A coordinated youth campaign exposing how the tobacco industry uses flavours, digital marketing, lifestyle branding, and misleading claims to attract a new generation.',
+                            'image' => '/no-tobacco.jpg',
+                            'slug' => 'unmasking-industry-appeal-2025',
+                            'year' => '2025',
+                            'category' => 'World No Tobacco Day',
+                            'policy_issue' => 'Flavors & Marketing',
+                        ],
+                    ],
                 ]
             ]
         );
@@ -341,64 +473,29 @@ class DatabaseSeeder extends Seeder
         );
 
         // Declarations — Declaration Cards (First Declaration group)
+        $declarations = [];
+        for ($i = 1; $i <= 9; $i++) {
+            $num = str_pad($i, 2, '0', STR_PAD_LEFT);
+            $declarations[] = [
+                'slug' => "rec-role-$num",
+                'title' => 'Recognizing the role of Tobacco Industry',
+                'summary' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                'details' => []
+            ];
+        }
+
         PageSection::updateOrCreate(
             ['page_id' => $declarationsPage->id, 'section_key' => 'first_declaration'],
             [
                 'title' => 'First Declaration Block',
                 'content' => [
-                    'declarations' => [
-                        [
-                            'slug' => 'ban-novel-recreational-products',
-                            'title' => 'Ban on novel recreational addictive products',
-                            'summary' => 'Call for stricter controls on emerging nicotine and tobacco products that target young people.',
-                            'details' => [
-                                'Prevent new nicotine products from being marketed as lifestyle or youth-focused experiences.',
-                                'Close regulatory gaps around flavored and disposable vape devices.',
-                            ],
-                        ],
-                        [
-                            'slug' => 'financial-accountability-and-liability',
-                            'title' => 'Stronger liability and financial accountability',
-                            'summary' => 'Demand legal accountability for manufacturers and distributors that profit from harmful products.',
-                            'details' => [
-                                'Hold companies responsible for health costs related to youth addiction.',
-                                'Require transparent reporting on marketing spend targeting young audiences.',
-                            ],
-                        ],
-                    ],
+                    'declarations' => $declarations
                 ]
             ]
         );
 
-        // Declarations — Second Declaration group
-        PageSection::updateOrCreate(
-            ['page_id' => $declarationsPage->id, 'section_key' => 'second_declaration'],
-            [
-                'title' => 'Second Declaration Block',
-                'content' => [
-                    'declarations' => [
-                        [
-                            'slug' => 'tobacco-depiction-regulation',
-                            'title' => 'Regulate tobacco depiction in entertainment and digital media',
-                            'summary' => 'Ask for limits on how tobacco and nicotine products are portrayed in media popular with youth.',
-                            'details' => [
-                                'Reduce glamorization of smoking and vaping in film, TV, and online content.',
-                                'Ensure age-appropriate warnings accompany product depiction in digital campaigns.',
-                            ],
-                        ],
-                        [
-                            'slug' => 'advance-global-tobacco-control',
-                            'title' => 'Advance global tobacco control policies',
-                            'summary' => 'Push for stronger international commitments and alignment with youth health priorities.',
-                            'details' => [
-                                'Support adoption of stricter tobacco control measures in regional health agreements.',
-                                'Raise youth voices in global policy forums and accountability mechanisms.',
-                            ],
-                        ],
-                    ],
-                ]
-            ]
-        );
+        // Delete second declaration block if it exists to keep only the 9 items in the first block
+        PageSection::where('page_id', $declarationsPage->id)->where('section_key', 'second_declaration')->delete();
 
         // Declarations — Take Action CTA
         PageSection::updateOrCreate(
@@ -451,7 +548,7 @@ class DatabaseSeeder extends Seeder
                 'title' => 'Who We Are',
                 'content' => [
                     'heading' => 'Who We Are',
-                    'statement' => 'Global Youth Voices is a youth movement convened by the Global Center for Good Governance in Tobacco Control that brings together youth organizations, coalitions, and young advocates working to protect public health from tobacco industry interference.',
+                    'statement' => '<strong>Global Youth Voices</strong> is a youth movement convened by the <span class="text-[#0E85B1] font-bold">Global Center for Good Governance in Tobacco Control</span> that brings together <em class="font-semibold text-[#42516F]">youth organizations, coalitions,</em> and <em class="font-semibold text-[#42516F]">young advocates</em> working to <span class="border-b-[3px] border-[#fecf02] pb-0.5 font-bold">protect public health</span> from tobacco industry interference.',
                     'description_paragraphs' => [
                         'Through campaigns, youth statements, policy advocacy, and regional engagement, GYV amplifies young people\'s calls for stronger tobacco control, industry accountability, and protection from nicotine addiction and industry-driven harms.',
                         'GYV provides a platform for youth voices to be heard not only in awareness campaigns, but also in policy spaces where decisions on tobacco control, public health, and accountability are shaped.',
@@ -529,10 +626,76 @@ class DatabaseSeeder extends Seeder
                     'heading' => 'Coordination and Regional Spokespersons',
                     'description' => 'Meet the regional coordinators and spokespersons who represent youth voices at the highest levels of global health policy.',
                     'spokespersons' => [
-                        ['name' => 'Spokesperson Name', 'region' => 'Global Coordinator', 'image' => '/spokesperson-placeholder.png'],
-                        ['name' => 'Spokesperson Name', 'region' => 'Africa Region', 'image' => '/spokesperson-placeholder.png'],
-                        ['name' => 'Spokesperson Name', 'region' => 'Asia Pacific', 'image' => '/spokesperson-placeholder.png'],
-                        ['name' => 'Spokesperson Name', 'region' => 'Europe', 'image' => '/spokesperson-placeholder.png'],
+                        [
+                            'name' => 'Yvette Mbewe',
+                            'organization' => 'TOFAZA Youth Advocates',
+                            'country' => 'Zambia',
+                            'region' => 'AFRO',
+                            'image' => '/homepage/hero/avatar.svg',
+                        ],
+                        [
+                            'name' => 'Lesego Mateme',
+                            'organization' => 'South Africa Tobacco Free Youth Forum',
+                            'country' => 'South Africa',
+                            'region' => 'AFRO',
+                            'image' => null,
+                        ],
+                        [
+                            'name' => 'Lisa Lu',
+                            'organization' => 'IYTC',
+                            'country' => 'US',
+                            'region' => 'AMRO',
+                            'image' => null,
+                        ],
+                        [
+                            'name' => 'Juan Herrera',
+                            'organization' => 'Alianza Juvenil',
+                            'country' => 'Colombia',
+                            'region' => 'AMRO',
+                            'image' => null,
+                        ],
+                        [
+                            'name' => 'Ana Paula Ramis',
+                            'organization' => 'RIPO',
+                            'country' => 'Mexico',
+                            'region' => 'AMRO',
+                            'image' => null,
+                        ],
+                        [
+                            'name' => 'Mehrbanoo Hosseinirad',
+                            'organization' => 'IMSA Iran',
+                            'country' => 'Iran',
+                            'region' => 'AMRO',
+                            'image' => null,
+                        ],
+                        [
+                            'name' => 'Sama Ghozlan',
+                            'organization' => 'IPSF',
+                            'country' => 'Jordan',
+                            'region' => 'EMRO',
+                            'image' => null,
+                        ],
+                        [
+                            'name' => 'Karina Mocanu',
+                            'organization' => 'ENSP Next',
+                            'country' => 'Belgium',
+                            'region' => 'EURO',
+                            'image' => null,
+                        ],
+                        [
+                            'name' => 'Hilario de los Santos',
+                            'organization' => 'Healthy Philippines Youth Network Alliance',
+                            'country' => 'Philippines',
+                            'region' => 'WPRO',
+                            'image' => null,
+                        ],
+                        [
+                            'name' => 'Sara Ruzana',
+                            'organization' => 'ASEAN Youth Network',
+                            'country' => 'Indonesia',
+                            'region' => 'WPRO',
+                            'image' => null,
+                        ],
                     ],
                 ]
             ]
@@ -544,12 +707,35 @@ class DatabaseSeeder extends Seeder
             [
                 'title' => 'Our Global Network',
                 'content' => [
-                    'heading' => 'Our Global Network',
+                    'heading_prefix' => 'Our',
+                    'highlight' => 'Global',
+                    'heading_suffix' => 'Network',
+                    'p1' => 'GYV brings together youth-led and youth-serving organizations, professional associations, coalitions, and advocates from different parts of the world.',
+                    'p2' => 'Participating organizations contribute according to their experience and capacity. Some lead campaigns, develop technical messages, or participate in policy discussions. Others translate materials, engage local decision-makers, share country perspectives, or amplify global calls through their networks.',
+                    'p3' => 'What connects the network is not organizational size, but commitment to independent, evidence-informed, and ambitious tobacco-control advocacy.',
+                    'partners_title' => 'Participating Organizations and Coalitions',
+                    'partners_subtitle' => 'Explore the organizations contributing to the Global Youth Voices movement.',
                     'stats' => [
-                        ['value' => '200+', 'label' => 'Campaigns Launched'],
-                        ['value' => '5M+', 'label' => 'Petitions Signed'],
-                        ['value' => '20+', 'label' => 'Events Held'],
-                        ['value' => '20K+', 'label' => 'Members Worldwide'],
+                        [
+                            'value' => '77',
+                            'title' => 'Participating organizations and coalitions',
+                            'subtitle' => 'Working across youth, health, development, education, environment, and related fields.',
+                        ],
+                        [
+                            'value' => '10',
+                            'title' => 'Regional youth spokespersons',
+                            'subtitle' => 'Supporting coordination and representation across regions.',
+                        ],
+                        [
+                            'value' => '6',
+                            'title' => 'WHO regions',
+                            'subtitle' => 'Connecting different policy, social, and cultural contexts.',
+                        ],
+                        [
+                            'value' => '130',
+                            'title' => 'And more countries reached',
+                            'subtitle' => 'Through the combined networks of participating organizations.',
+                        ],
                     ],
                     'partners' => [
                         ['name' => 'Vital Strategies'],
@@ -583,24 +769,178 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // About — Join or Partner With Us
+        // About — Our Journey (Milestones Timeline)
+        PageSection::updateOrCreate(
+            ['page_id' => $aboutPage->id, 'section_key' => 'journey'],
+            [
+                'title' => 'Our Journey',
+                'content' => [
+                    'heading_prefix' => 'Our',
+                    'highlight' => 'Journey',
+                    'description' => 'GYV continues to grow through the collective work of youth organizations and advocates who have brought shared demands into campaigns and policy spaces around the world.',
+                    'cta_text' => 'Explore GYV Campaigns',
+                    'cta_link' => '/campaigns',
+                    'milestones' => [
+                        [
+                            'year' => '2024',
+                            'title' => 'A shared youth position',
+                            'description' => 'The Global Youth Voices Declaration was launched as a unified call for bold tobacco-control action, protection from industry interference, and tobacco industry accountability.',
+                            'image' => 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80',
+                        ],
+                        [
+                            'year' => '2025',
+                            'title' => 'Regional Advocacy Expansion',
+                            'description' => 'Expanded regional spokespersons networks across WHO AFRO, AMRO, EMRO, EURO, and WPRO regions, driving youth-led policy workshops and campaign responses.',
+                            'image' => '/homepage/hero/bg.jpg',
+                        ],
+                        [
+                            'year' => '2025',
+                            'title' => 'COP Global Youth Mobilization',
+                            'description' => 'Consolidated youth representatives from over 30 countries to deliver statements and push for strict tobacco industry accountability measures at global WHO FCTC convenings.',
+                            'image' => 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80',
+                        ],
+                        [
+                            'year' => '2026',
+                            'title' => 'World No Tobacco Day 2026 Campaign',
+                            'description' => 'Mobilized over 77 youth coalitions worldwide to expose predatory nicotine marketing tactics and demand smoke-free environments for future generations.',
+                            'image' => 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80',
+                        ],
+                        [
+                            'year' => '2026',
+                            'title' => 'Global Youth Network Scaling',
+                            'description' => 'Reached 130+ countries through combined member networks, connecting local grassroots actions directly into international public health decision-making.',
+                            'image' => '/homepage/hero/bg.jpg',
+                        ],
+                    ],
+                ]
+            ]
+        );
+
+        // About — Work with Global Youth Voices
         PageSection::updateOrCreate(
             ['page_id' => $aboutPage->id, 'section_key' => 'join'],
             [
-                'title' => 'Join or Partner With Us',
+                'title' => 'Work with Global Youth Voices',
                 'content' => [
-                    'heading_prefix' => 'Join or',
-                    'heading_highlight' => 'Partner',
-                    'heading_suffix' => 'With Us!',
-                    'body_paragraphs' => [
-                        'GYV welcomes youth organizations, student groups, and public health partners who share our commitment to protecting young people from tobacco industry tactics.',
-                        'Whether through campaigns, statements, regional engagement, or local advocacy, there are many ways to be part of the movement.',
-                    ],
-                    'cta_text' => 'Join the movement',
+                    'heading_prefix' => 'Work with Global',
+                    'highlight' => 'Youth',
+                    'heading_suffix' => 'Voices',
+                    'p1' => 'GYV welcomes collaboration with credible and independent youth organizations, coalitions, advocates, and public health partners that share our commitment to stronger tobacco control.',
+                    'p2' => 'Working with GYV may include contributing to campaigns, sharing country perspectives, developing youth-friendly advocacy materials, participating in policy opportunities, translating messages, or amplifying collective calls.',
+                    'p3' => 'Participation is subject to conflict-of-interest review.',
+                    'cta_text' => 'Partner with GYV',
                     'cta_link' => '/contact',
                 ]
             ]
         );
+
+        // ══════════════════════════════════════════
+        // CONTACT PAGE — all 5 sections
+        // ══════════════════════════════════════════
+        $contactPage = Page::updateOrCreate(
+            ['slug' => 'contact'],
+            [
+                'title' => 'Contact Us',
+                'meta_title' => 'Partner with Global Youth Voices | Contact Us',
+                'meta_description' => 'Join a global network of independent youth organizations, coalitions, and advocates working for stronger tobacco control and tobacco industry accountability.',
+            ]
+        );
+
+        // Contact — Hero Section
+        PageSection::updateOrCreate(
+            ['page_id' => $contactPage->id, 'section_key' => 'hero'],
+            [
+                'title' => 'Contact Hero',
+                'content' => [
+                    'highlight' => 'Partner',
+                    'heading_line1_suffix' => 'with Global',
+                    'heading_line2' => 'Youth Voices',
+                    'description' => 'Join a global network of independent youth organizations, coalitions, and advocates working for stronger tobacco control and tobacco industry accountability.',
+                    'illustration' => '/events.png',
+                ]
+            ]
+        );
+
+        // Contact — Partner Overview Section
+        PageSection::updateOrCreate(
+            ['page_id' => $contactPage->id, 'section_key' => 'partner_overview'],
+            [
+                'title' => 'Partner Overview',
+                'content' => [
+                    'col1_title_part1' => 'Who We',
+                    'col1_title_highlight' => 'Work',
+                    'col1_title_part2' => 'With',
+                    'col1_subtitle' => 'GYV works with:',
+                    'who_we_work_with' => [
+                        ['text' => 'Youth-led and youth-serving organizations', 'color' => 'yellow'],
+                        ['text' => 'Regional and global youth networks', 'color' => 'cyan'],
+                        ['text' => 'Student and professional associations', 'color' => 'yellow'],
+                        ['text' => 'Public health and tobacco-control advocates', 'color' => 'cyan'],
+                        ['text' => 'Independent young advocates with relevant experience', 'color' => 'yellow'],
+                        ['text' => 'Institutions supporting meaningful youth participation', 'color' => 'cyan'],
+                    ],
+                    'col2_title_highlight' => 'Ways',
+                    'col2_title_part2' => 'to Contribute',
+                    'col2_subtitle' => 'Partnership may include:',
+                    'ways_to_contribute' => [
+                        ['text' => 'Contributing to global campaigns', 'color' => 'cyan'],
+                        ['text' => 'Sharing country or regional perspectives', 'color' => 'yellow'],
+                        ['text' => 'Participating in interviews, webinars, and policy events', 'color' => 'cyan'],
+                        ['text' => 'Translating or adapting campaign materials', 'color' => 'yellow'],
+                        ['text' => 'Engaging policymakers or media', 'color' => 'cyan'],
+                        ['text' => 'Amplifying GYV statements', 'color' => 'yellow'],
+                        ['text' => 'Helping develop youth-friendly resources', 'color' => 'cyan'],
+                    ],
+                ]
+            ]
+        );
+
+        // Contact — Independence Matters Section
+        PageSection::updateOrCreate(
+            ['page_id' => $contactPage->id, 'section_key' => 'independence_matters'],
+            [
+                'title' => 'Independence Matters',
+                'content' => [
+                    'title_part1' => 'Our',
+                    'title_highlight' => 'Independence',
+                    'title_part2' => 'Matters',
+                    'body_p1' => 'There is a fundamental and irreconcilable conflict between public health interests and the interests of the tobacco industry.',
+                    'body_p2' => 'GYV does not engage with the tobacco industry or with organizations and individuals furthering its interests. All partnership and participation requests are reviewed for potential conflicts of interest.',
+                    'body_p3' => 'Submitting an expression of interest does not automatically result in participation.',
+                    'checkbox_label' => 'I confirm that I have read the GYV conflict-of-interest statement and that neither I nor my organization has a relationship with the tobacco industry or entities furthering its interests.',
+                ]
+            ]
+        );
+
+        // Contact — Contact Form Info
+        PageSection::updateOrCreate(
+            ['page_id' => $contactPage->id, 'section_key' => 'form_info'],
+            [
+                'title' => 'Form Info & Feedback',
+                'content' => [
+                    'success_title' => 'Expression of Interest Received!',
+                    'success_description' => 'Thank you for submitting your expression of interest to Global Youth Voices. Our team will review your application and conflict-of-interest declaration shortly.',
+                    'reset_button_text' => 'Submit Another Form',
+                ]
+            ]
+        );
+
+        // Contact — Take Action CTA
+        PageSection::updateOrCreate(
+            ['page_id' => $contactPage->id, 'section_key' => 'take_action_cta'],
+            [
+                'title' => 'Contact Take Action CTA',
+                'content' => [
+                    'heading' => 'Ready to take action?',
+                    'description' => 'Join thousands of youth advocates and sign the declaration today.',
+                    'primary_btn_text' => 'Sign the Declaration',
+                    'primary_btn_link' => '/campaigns',
+                    'secondary_btn_text' => 'Learn More',
+                    'secondary_btn_link' => '/about-us',
+                ]
+            ]
+        );
+
 
         // ══════════════════════════════════════════
         // EVENTS PAGE — all 3 sections

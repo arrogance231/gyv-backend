@@ -41,6 +41,14 @@ class User extends Authenticatable
     }
 
     /**
+     * The permissions that directly belong to the user (overrides).
+     */
+    public function permissions(): BelongsToMany
+    {
+        return $this->belongsToMany(Permission::class);
+    }
+
+    /**
      * Check if the user has a specific role.
      */
     public function hasRole(string $roleSlug): bool
@@ -53,6 +61,12 @@ class User extends Authenticatable
      */
     public function hasPermission(string $permissionSlug): bool
     {
+        // 1. Check direct permission overrides first
+        if ($this->permissions()->where('slug', $permissionSlug)->exists()) {
+            return true;
+        }
+
+        // 2. Fallback to role permissions
         return $this->roles()->whereHas('permissions', function ($query) use ($permissionSlug) {
             $query->where('slug', $permissionSlug);
         })->exists();

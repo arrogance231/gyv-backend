@@ -22,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::policy(\App\Models\Campaign::class, \App\Policies\CampaignPolicy::class);
+
         // Dynamic Permission Gate Mapping
         try {
             if (Schema::hasTable('permissions')) {

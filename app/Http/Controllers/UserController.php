@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Permission;
+use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
@@ -12,7 +14,7 @@ use Illuminate\Validation\Rule;
 class UserController extends Controller
 {
     /**
-     * List system users with their roles.
+     * List system users with their roles and permission overrides.
      */
     public function index()
     {
@@ -20,11 +22,23 @@ class UserController extends Controller
             return response()->json(['message' => 'Unauthorized action.'], 403);
         }
 
-        return User::with('roles')->get();
+        return User::with(['roles', 'permissions'])->get();
     }
 
     /**
-     * Create a user and attach a role.
+     * List all system permissions.
+     */
+    public function permissions()
+    {
+        if (Gate::denies('manage-users')) {
+            return response()->json(['message' => 'Unauthorized action.'], 403);
+        }
+
+        return Permission::orderBy('name', 'asc')->get();
+    }
+
+    /**
+     * Create a user, attach role, and optionally sync permission overrides.
      */
     public function store(Request $request)
     {
@@ -37,6 +51,8 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
             'role' => 'required|string|exists:roles,slug',
+            'permissions' => 'nullable|array',
+            'permissions.*' => 'string|exists:permissions,slug'
         ]);
 
         $user = User::create([
@@ -48,14 +64,25 @@ class UserController extends Controller
         $role = Role::where('slug', $validated['role'])->first();
         $user->roles()->attach($role);
 
+        if (!empty($validated['permissions'])) {
+            $permissionIds = Permission::whereIn('slug', $validated['permissions'])->pluck('id');
+            $user->permissions()->sync($permissionIds);
+        }
+
+        ActivityLogger::log('created', 'User', $user->id, [
+            'name' => $user->name,
+            'email' => $user->email,
+            'role' => $role->slug
+        ]);
+
         return response()->json([
             'message' => 'User created successfully',
-            'user' => $user->load('roles')
+            'user' => $user->load(['roles', 'permissions'])
         ], 201);
     }
 
     /**
-     * Update user details and sync roles.
+     * Update user details, sync roles, and sync permission overrides.
      */
     public function update(Request $request, $id)
     {
@@ -76,6 +103,8 @@ class UserController extends Controller
             ],
             'password' => 'nullable|string|min:6',
             'role' => 'required|string|exists:roles,slug',
+            'permissions' => 'nullable|array',
+            'permissions.*' => 'string|exists:permissions,slug'
         ]);
 
         $updateData = [
@@ -92,9 +121,22 @@ class UserController extends Controller
         $role = Role::where('slug', $validated['role'])->first();
         $user->roles()->sync([$role->id]);
 
+        $permissionIds = [];
+        if (isset($validated['permissions'])) {
+            $permissionIds = Permission::whereIn('slug', $validated['permissions'])->pluck('id')->toArray();
+        }
+        $user->permissions()->sync($permissionIds);
+
+        ActivityLogger::log('updated', 'User', $user->id, [
+            'name' => $user->name,
+            'email' => $user->email,
+            'role' => $role->slug,
+            'permissions_count' => count($permissionIds)
+        ]);
+
         return response()->json([
             'message' => 'User updated successfully',
-            'user' => $user->load('roles')
+            'user' => $user->load(['roles', 'permissions'])
         ]);
     }
 
@@ -112,7 +154,12 @@ class UserController extends Controller
         }
 
         $user = User::findOrFail($id);
+        $userEmail = $user->email;
         $user->delete();
+
+        ActivityLogger::log('deleted', 'User', $id, [
+            'email' => $userEmail
+        ]);
 
         return response()->json([
             'message' => 'User deleted successfully'
